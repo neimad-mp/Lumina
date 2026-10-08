@@ -14,6 +14,7 @@ import { Npc } from './Npc.js';
 import { Critters } from './Critters.js';
 import { Weather } from './Weather.js';
 import { AudioDirector } from './AudioDirector.js';
+import { configureLevelAudio, levelAudio } from './LevelAudio.js';
 import { ResolutionGovernor } from './ResolutionGovernor.js';
 import { buildDebugControls } from './DebugControls.js';
 import { conversationFor } from './dialogue.js';
@@ -305,6 +306,7 @@ export class Game {
 
     this.ui = new UI(document.body);
     this.audio = new AudioSystem({ volume: 0.6 });
+    configureLevelAudio(this.audio, this.env);
 
     // ---- world ----
     this.world = new World({ engine, textures: this.textures, lighting: this.lighting, particles: this.particles, godRays: this.godRays, level: this.level });
@@ -383,6 +385,7 @@ export class Game {
     this.audioDirector = new AudioDirector({
       audio: this.audio, lighting: this.lighting, weather: this.weather, tileMap: this.tileMap,
       fires: this.world.fires, falls: this.world.falls.filter((f) => f.splash).map((f) => f.anchor),
+      dungeon: levelAudio(this.env).dungeon,
     });
 
     // ---- UI ----
@@ -608,7 +611,7 @@ export class Game {
     }
     this.audioDirector.enabled = true;
     this.audioDirector.update(1, this.player.position);
-    if (!instant && this.env.music !== false) this.audio.startMusic();
+    if (!instant && this.env.music !== false) this.audio.startMusic({ track: levelAudio(this.env).exploration });
     this._later(instant ? 0.2 : 0.9, () => {
       this.ui.banner.show(this.level.name, this.level.subtitle, { duration: 3.2 });
       this.ui.hud.showHelp(true);
@@ -634,7 +637,7 @@ export class Game {
       // the level's music starts like after the title screen (?autostart: editor play-tests) —
       // unless that first key is the music key itself, which toggles it on in the same frame
       const musicKey = e?.type === 'keydown' && (this.engine?.input?.bindings?.music ?? ['KeyM']).includes(e.code);
-      if (this.mode === 'play' && this.env.music !== false && !this.audio.musicPlaying && !musicKey) this.audio.startMusic();
+      if (this.mode === 'play' && this.env.music !== false && !this.audio.musicPlaying && !musicKey) this.audio.startMusic({ track: this.combat?.musicTrack ?? levelAudio(this.env).exploration });
     };
     window.addEventListener('keydown', unlock, true);
     window.addEventListener('pointerdown', unlock, true);
@@ -673,8 +676,9 @@ export class Game {
   }
 
   setMusic(on) {
+    if (this.combat?.music) return this.combat.music.setPlaying(on);
     // combat levels restart the track combat wants (battle / boss while fighting)
-    if (on) this.audio.startMusic(this.combat ? { track: this.combat.musicTrack } : undefined);
+    if (on && this.env.music !== false) this.audio.startMusic({ track: this.combat?.musicTrack ?? levelAudio(this.env).exploration });
     else this.audio.stopMusic();
     return this.audio.musicPlaying;
   }
@@ -941,7 +945,7 @@ export class Game {
         if (input.actionPressed('time')) this.cycleTime();
         if (input.actionPressed('weather')) this.cycleWeather();
         if (input.actionPressed('music')) {
-          const on = this.setMusic(!this.audio.musicPlaying);
+          const on = this.setMusic(!(this.combat?.music?.playing ?? this.audio.musicPlaying));
           ui.hud.toast(on ? '♪ Music on' : 'Music off', 1.4);
         }
       }

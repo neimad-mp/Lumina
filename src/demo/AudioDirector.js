@@ -16,15 +16,16 @@ import { clamp, smoothstep } from '../engine/index.js';
 export class AudioDirector {
   /**
    * @param {{ audio: AudioSystem, lighting: LightingSystem, weather: Weather, tileMap: TileMap,
-   *           fires?: {x:number, z:number}[], falls?: {x:number, z:number}[] }} ctx
+   *           fires?: {x:number, z:number}[], falls?: {x:number, z:number}[], dungeon?: boolean }} ctx
    *   fires: campfire positions; falls: foot of every roaring waterfall (both may be empty)
    */
-  constructor({ audio, lighting, weather, tileMap, fires = [], falls = [] }) {
+  constructor({ audio, lighting, weather, tileMap, fires = [], falls = [], dungeon = false }) {
     this.audio = audio;
     this.lighting = lighting;
     this.weather = weather;
     this.fires = fires;
     this.falls = falls;
+    this.dungeon = dungeon;
     this.enabled = false;
     this._timer = 0;
     // water sample points: the centre of every water tile (river, pool, pond, stream), packed
@@ -32,7 +33,7 @@ export class AudioDirector {
     const pts = [];
     tileMap.forEachTile((i, j, t) => { if (t.water) pts.push(i + 0.5, j + 0.5); });
     this.waterXZ = Float32Array.from(pts);
-    this.levels = { wind: 0, birds: 0, crickets: 0, fire: 0, water: 0 };
+    this.levels = { wind: 0, birds: 0, crickets: 0, fire: 0, water: 0, dungeon: 0 };
     /**
      * 0..1: how much a fight is going on (COMBAT.md §12.2). Birds are scaled by (1 − 0.8·i) so
      * they fall silent while the player is engaged; combat sets 1 while engaged and eases it back
@@ -78,6 +79,12 @@ export class AudioDirector {
     L.crickets = clamp(smoothstep(0.35, 0.9, night) * (1 - storm) * 0.8);
     L.fire = clamp((1 - smoothstep(2, 15, dFire)) ** 1.5 * 0.9);
     L.water = clamp(Math.max((1 - smoothstep(1, 11, dWater)) * 0.55, (1 - smoothstep(3, 20, dFall)) * 0.95));
+    if (this.dungeon) {
+      L.wind = L.birds = L.crickets = 0;
+      L.dungeon = 0.34 * (1 - 0.25 * clamp(this.combatIntensity));
+      L.fire *= 0.8;
+      L.water *= 0.7;
+    }
     return L;
   }
 

@@ -204,7 +204,7 @@ Camera position = `focusPoint + (sin(yaw)·cos(pitch), sin(pitch), cos(yaw)·cos
 point in the target's movement direction.
 
 ```js
-// audio/AudioSystem.js — procedural WebAudio, no files
+// audio/AudioSystem.js — shared WebAudio with procedural defaults and opt-in recordings
 export class AudioSystem {
   constructor({ volume = 0.6 } = {})
   unlock()                     // call from a user gesture; creates/resumes AudioContext
@@ -227,6 +227,16 @@ virtual codes `Mouse0` / `Mouse1` / `Mouse2`; `input.lastDevice` is `'keyboard' 
 unchanged), `startMusic({ track })` with the tracks `emberfall` / `battle` / `boss`,
 `setMusicSection`, `playStinger` (`victory`, `levelup`) and the getter `musicTrack`. Without these
 calls every behaviour above is unchanged.
+
+**Recorded audio additions (2026-10-09).** `registerRecordedMusic(catalog)` adds named local
+recordings (`url`, synthesized `fallback`, relative `gain`, optional A/B bounds in seconds).
+`prepareMusic()` prefetches files without a context; decoding waits for unlock. Playback shares
+the music bus, volumes, master mute and stinger ducking. Sources stop on the audio clock after
+their fade and disconnect on end. Loading uses a synthesized fallback; stale loads cannot start
+after stop, death, victory, disposal or a superseding request. `recordedMusicState` reports
+loaded URLs, errors, active voices and fallback status. Offline checks explicitly supply buffers
+through `recordings.supply(url, buffer)`. `dungeon` is an additive ambience layer, silent by
+default. See [Ashen Crypt audio](docs/design/levels/ashen-crypt-audio.md).
 
 ### 4.2 Post-processing — `src/engine/render/PostFX.js`
 

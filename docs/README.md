@@ -22,8 +22,9 @@
 **Lumina** is an HD-2D game engine in the style of *Octopath Traveler II*, built on three.js r186
 with plain JavaScript ES modules: pixel-art sprites and textures standing in a lit, shadowed,
 tilt-shift-blurred 3D diorama, with a 24-hour lighting palette, weather, particles, god rays,
-procedural music and an Octopath-style UI. **Everything is generated at runtime** — textures,
-character sheets, props, sounds and music; the engine ships no image or audio files. Three front
+procedural effects and an Octopath-style UI. Textures, character sheets and props are generated
+at runtime. Ashen Crypt adds a [hybrid soundtrack](design/levels/ashen-crypt-audio.md), with
+prepared recordings and retained synthesized effects. Three front
 ends share the engine: a demo **game** that plays `lumina-level` JSON files (seven shipped levels,
 from the 28 × 22 hamlet Willowmere to the 128 × 128 Starfall Vale and town of Gildhaven, including **Cinderwatch Pass**,
 the one level with real-time ARPG combat), a visual **level editor** with a live HD-2D preview, and

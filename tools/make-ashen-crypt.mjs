@@ -111,6 +111,7 @@ const raw = {
   environment: { ...DEFAULT_ENVIRONMENT, timeOfDay: 22.5, clock: false, weather: 'clear', border: 'none', outerScenery: false,
     godRays: false, dust: true, music: true, camera: { distance: 24, pitch: 42 }, highGround: null, fogScale: 0.7,
     look: 'dark-dungeon', combatText: { bossEpithet: 'Keeper of the Unburied', victorySubtitle: 'The last seal is broken' },
+    audioProfile: 'ashen-crypt',
     title: { title: 'ASHEN CRYPT', subtitle: 'Beneath the Last Light', credit: 'A Lumina dark HD-2D dungeon', prompt: 'Press any key' },
     titleCamera: { x: 32.5, z: 58.5, y: 1, driftX: 1.5, driftZ: 1, distance: 25 },
   },

@@ -205,6 +205,8 @@ export interface LevelEnvironment
   dust: boolean;
   /** Start the music when the game leaves the title screen; only `false` keeps it silent. */
   music: boolean;
+  /** Optional recorded soundtrack/dungeon mix; absent or unknown = original procedural audio. */
+  audioProfile?: string;
   /** Camera framing; null = automatic (§9.3). */
   camera: LevelCamera | null;
   /** Steeper camera while the player stands above `minY`; null = none. */

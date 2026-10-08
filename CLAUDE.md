@@ -9,10 +9,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 **Lumina** — an HD-2D (Octopath Traveler II-style) engine on three.js r186: pixel-art sprites in a
-lit, shadowed, depth-of-field-blurred 3D diorama. Everything the game shows or plays (textures,
-sprites, sounds, music) is generated procedurally at runtime; the engine and game ship no image or
-audio files (UI fonts come from `@fontsource/*`; the only images in the repo are the documentation
-screenshots in `docs/assets/screenshots/`). Three front ends share the engine:
+lit, shadowed, depth-of-field-blurred 3D diorama. Visuals and useful effects are generated at
+runtime; Ashen Crypt adds three prepared ElevenLabs music recordings through the shared audio
+system. Other levels retain their procedural music. Read the
+[dungeon audio direction](docs/design/levels/ashen-crypt-audio.md). UI fonts come from
+`@fontsource/*`. Three front ends share the engine:
 the game (`index.html` → `src/main.js` → `src/demo/`), the level editor (`editor.html` →
 `src/editor/`) and standalone module test pages (`sandbox/`). Plain JavaScript ES modules,
 type-checked through their JSDoc by `tsc` (`checkJs`, `npm run typecheck`; no `.ts` files, no

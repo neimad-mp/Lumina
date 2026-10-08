@@ -1656,6 +1656,14 @@ never `Math.random`).
 
 ### 12.2 Music
 
+**Dungeon addition (2026-10-09):** optional `environment.audioProfile: 'ashen-crypt'` maps the
+three roles below to `ashen-exploration`, `ashen-battle`, `ashen-boss`. Existing profiles keep
+`emberfall` / `battle` / `boss`. The dungeon recordings use the shared context and bus; boss
+section B crossfades to a prepared alternate section, with no unverified beat alignment.
+Victory/death/respawn return to the selected exploration track. M during death changes the
+respawn intent; switching on during victory waits for the cue to finish. See the
+[dungeon audio contract](../design/levels/ashen-crypt-audio.md).
+
 ```js
 export const MUSIC_TRACKS = ['emberfall', 'battle', 'boss'];
 audio.startMusic({ fade, track = 'emberfall' })   // additive option; the default reproduces today exactly

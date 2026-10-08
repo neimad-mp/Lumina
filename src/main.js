@@ -15,7 +15,8 @@ import { validateLevel, normalizeLevel } from './engine/level/LevelFormat.js';
 
 /** @import { Level } from './engine/level/types.js' */
 
-const DEFAULT_LEVEL = 'emberfall';
+// Playtest exports can open the requested dungeon directly; ordinary builds still use Emberfall.
+const DEFAULT_LEVEL = import.meta.env.VITE_DEFAULT_LEVEL || 'emberfall';
 
 const params = new URLSearchParams(window.location.search);
 const autostart = params.has('autostart') && params.get('autostart') !== '0';

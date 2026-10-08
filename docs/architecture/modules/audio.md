@@ -1,17 +1,23 @@
 # Audio module: AudioSystem
 
-> **Purpose.** This is the reference for Lumina's fully procedural WebAudio engine. It
-> synthesises every sound at runtime, with no audio files: eight UI and gameplay sound effects,
+> **Purpose.** This is the reference for Lumina's shared WebAudio engine. It
+> synthesises eight UI and gameplay sound effects,
 > five crossfading ambience layers (wind, birds, crickets, fire, water) and "Emberfall Evening",
 > a looping harp, string-pad and flute folk tune. Combat levels add 35 combat sound effects, two
 > combat music tracks ("Ashes on the Wind", "Heart of Cinders") with crossfades and sections, and
 > two stingers (§4.1, §6.1). The page covers the API, the audio graph, how each sound is built and
 > how to schedule, mix and test it.
 >
+> Ashen Crypt's optional recorded soundtrack uses the same context and music bus. See
+> [recorded dungeon audio](../../design/levels/ashen-crypt-audio.md) for its catalog, lifecycle,
+> profile, asset preparation and acceptance checks. A sixth ambience layer, `dungeon`, supplies
+> quiet stone-room rumble; other levels retain the original five-layer mix.
+>
 > **Audience:** game programmers wiring sound, anyone extending the sound set, and AI agents.
 >
 > **Source of truth:** [`src/engine/audio/AudioSystem.js`](../../../src/engine/audio/AudioSystem.js)
-> (single file). Game-side mixing lives in [`src/demo/AudioDirector.js`](../../../src/demo/AudioDirector.js).
+> with recorded-source ownership in [`RecordedMusic.js`](../../../src/engine/audio/RecordedMusic.js).
+> Game-side mixing lives in [`src/demo/AudioDirector.js`](../../../src/demo/AudioDirector.js).
 > Contract: [ARCHITECTURE.md §4.1 (audio)](../../../ARCHITECTURE.md).
 >
 > **Related:** [modules index](README.md) · [core.md](core.md) (Engine systems) · [GAME.md](../GAME.md)
@@ -34,7 +40,7 @@ audio.playSfx('confirm');                         // silent no-op (returns false
 ```
 
 - `SFX_NAMES` = `['step', 'blip', 'confirm', 'cancel', 'open', 'close', 'chime', 'splash']`
-- `AMBIENCE_LAYERS` = `['wind', 'birds', 'crickets', 'fire', 'water']`
+- `AMBIENCE_LAYERS` = `['wind', 'birds', 'crickets', 'fire', 'water', 'dungeon']`
 - `COMBAT_SFX_NAMES` (35 names, §4.1), `MUSIC_TRACKS` = `['emberfall', 'battle', 'boss']` and
   `MUSIC_STINGERS` = `['victory', 'levelup']` (combat levels, [COMBAT.md §12](../../contracts/COMBAT.md)).
   All four are also exported by the engine barrel (`src/engine/index.js`).
@@ -83,7 +89,7 @@ Nothing touches WebAudio in the constructor. Everything is created lazily in `un
 | `masterVolume` | get/set | 0..1, smoothed (τ 30 ms). |
 | `muted` | get/set | Mutes the master, which keeps playing silently. |
 | `musicVolume`, `sfxVolume`, `ambienceVolume` | get/set | Bus levels 0..1 (τ 50 ms). |
-| `ambience` | getter | Copy of the current ambience targets `{ wind, birds, crickets, fire, water }`. |
+| `ambience` | getter | Copy of the current ambience targets `{ wind, birds, crickets, fire, water, dungeon }`. |
 | `playSfx(name, { volume = 1, pitch = 1, pan = 0, delay = 0 } = {})` | → boolean | Plays a one-shot from `SFX_NAMES` or `COMBAT_SFX_NAMES`. `volume` is a multiplier, `pitch` a frequency ratio (min 0.05), `pan` is −1..1 and `delay` is in seconds. Returns `false` when not ready, rate-limited, over the voice cap, or for an unknown name (which also logs one `console.warn` per name). |
 | `setAmbience(levels, { replace = false, fade = 2.5 } = {})` | | Sets layer levels 0..1. **Only the layers you pass change**; `replace: true` fades the others to 0. `fade` is the approximate crossfade time in seconds (min 0.05). Remembered before unlock. |
 | `startMusic({ fade = 2.5, track } = {})` | | Starts music with a fade-in. Before unlock it only records the wish, and playback starts on unlock. `track` is one of `MUSIC_TRACKS`; **without it the last requested track plays** (initially `'emberfall'`), so the unlock / resume path and `toggleMusic()` restart what was playing. The track that already plays is a no-op; a **different** track crossfades: the playing one takes the stop path with `fade` while the new one fades in over the same time. An unknown track logs one warning and changes nothing. |
@@ -91,7 +97,10 @@ Nothing touches WebAudio in the constructor. Everything is created lazily in `un
 | `musicPlaying` | getter | Reports **intent**: already `true` after `startMusic()` before unlock. |
 | `musicTrack` | getter | The requested track while music is wanted, else `null`. |
 | `musicSection` | getter | `'A'` / `'B'` of a playing combat track, else `null` (diagnostics). |
-| `setMusicSection(name)` | | `'A'` or `'B'`: the current combat track switches at the next bar line (§6.1); ignored by `'emberfall'` and unknown names. Remembered for that track until another track starts. |
+| `setMusicSection(name)` | | `'A'` or `'B'`: synthesized combat tracks switch at the next bar line (§6.1); registered recordings crossfade between their defined loop sections. Ignored by tracks without sections and unknown names. Remembered for that track until another track starts. |
+| `registerRecordedMusic(tracks)` | | Registers local-file track definitions, gains, fallback tracks and optional loop sections. See the dungeon audio contract. |
+| `prepareMusic()` | → Promise | Prefetches registered files; decodes them once a context exists. Playback intent and context creation remain controlled by the player gesture. |
+| `recordedMusicState` | getter | Loaded URLs, errors, active source count, playing recording and synthesized fallback status. |
 | `playStinger(name, { volume = 1 } = {})` | → boolean | `'victory'` (4-bar D-major fanfare) or `'levelup'` (a harp arpeggio and bells) over the music, which is ducked to 30 % underneath and swells back. Silent (`false`) before unlock and while the music is off. |
 | `toggleMusic()` | → boolean | Start (the remembered track) or stop, returns the new state. |
 | `update(dt)` | | Runs the music and ambience scheduler (engine-system compatible). |

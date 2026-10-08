@@ -32,9 +32,11 @@
 in a lit, shadowed, tilt-shift-blurred 3D diorama. It runs on **three.js r186**, is written in
 **plain JavaScript ES modules** (type-checked through their JSDoc by `tsc` — no `.ts` files —
 no framework, no test runner, no linter) and
-**generates every asset procedurally at runtime** — textures, character sheets, particles, sound
-effects and music. The repository contains no image or audio files (the screenshots under
-`docs/assets/` are documentation only).
+generates textures, character sheets, particles and useful effects at runtime. Ashen Crypt uses
+prepared ElevenLabs exploration/combat/boss recordings through the existing shared audio system;
+other levels retain their procedural music. Read the
+[dungeon audio direction](../design/levels/ashen-crypt-audio.md). The screenshots under
+`docs/assets/` are documentation only.
 
 | Emberfall (48 × 40), golden hour | Starfall Vale (128 × 128), night | The level editor |
 | --- | --- | --- |

@@ -69,12 +69,14 @@ challenging and rewarding to beat, and the mobs along the route as fun. They lik
 look and atmosphere, and considered the layout a strong first prototype.
 
 Preserve those qualities as the dungeon grows. The soundtrack is the next refinement: the user
-said the atmosphere could benefit from different music. Its musical direction is awaiting their
-choice; no new soundtrack has been adopted yet. This feedback supports the current prototype's
+said the atmosphere could benefit from different music. They subsequently adopted the
+[hybrid dungeon soundtrack](ashen-crypt-audio.md) and authorized new production recordings and
+integration on 2026-10-09 without another sample review. This feedback supports the prototype's
 combat and visual direction; broader difficulty and audio coverage still need review as content
 changes.
 
 This is the first playable dungeon prototype. Its enemies, hero, fires, music and boss reuse the
-current procedural assets. The earlier visual concept sheet is a direction reference. Equipment
+current procedural art and effects, with prepared music added for this dungeon. The earlier
+visual concept sheet is a direction reference. Equipment
 slots, wings, item glow tiers, `+0` to `+15` refining, jewel currency, persistent progression and
 multiplayer are later decisions.

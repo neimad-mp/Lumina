@@ -88,6 +88,10 @@ A level is plain JSON (`format: "lumina-level"`, `version: 1`):
 
 **Optional environment fields** (all backwards-compatible; absent = the game's automatic choice):
 
+`audioProfile: 'ashen-crypt'` selects the dungeon's prepared exploration/battle/boss music and
+room ambience mix. Absent or unknown profiles preserve the existing procedural soundtrack.
+The field is absent from defaults, survives editor save/resize and has no inspector control.
+
 Dungeon additions (2026-10-08): `look: 'dark-dungeon'` selects the shared game/editor charcoal
 lighting preset; absent/unknown names keep the original look. `combatText: { bossEpithet?,
 victorySubtitle? }` supplies level-specific strings; absent/non-string fields retain the existing

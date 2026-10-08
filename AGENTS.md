@@ -25,6 +25,12 @@ The user selected **Dark HD-2D** after reviewing visual examples: keep pixel-art
 lit 3D environments. Target **single-player first**. The first milestone is **a dark dungeon**,
 built on the existing combat and procedural asset pipeline.
 
+Audio direction adopted 2026-10-09: use a hybrid soundtrack for Ashen Crypt, with prepared
+ElevenLabs exploration/combat/boss recordings and useful synthesized effects. The user authorized
+production generation and integration without another sample approval round. Read
+`docs/design/levels/ashen-crypt-audio.md`; package assets locally, never provider credentials or
+runtime generation. Human playtesting still judges the finished mix.
+
 Wings, equipment glow, +0 to +15 refining and upgrade jewels are future feature goals, not
 claims about current implementation. Do not assume a class system, refining failure rules,
 multiplayer architecture or a replacement production asset pipeline; agree those separately.

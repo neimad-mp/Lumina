@@ -13,11 +13,11 @@ are preserved in `docs/history/` and the imported Git history remains intact.
 
 **Lumina** is a small engine for *HD-2D* games in the style of *Octopath Traveler II*: hand-drawn
 pixel-art sprites standing in a lit, shadowed, tilt-shift-blurred 3D diorama. It is built on
-three.js r186 with plain JavaScript ES modules (type-checked through their JSDoc), and **every
-asset is generated procedurally at runtime** —
-textures, character sheets, particles, sound effects and music. The engine and the game ship no
-image or audio files (the only images in the repository are the documentation screenshots in
-`docs/assets/`).
+three.js r186 with plain JavaScript ES modules (type-checked through their JSDoc). Textures,
+character sheets, particles and useful sound effects are generated at runtime. Ashen Crypt uses
+a hybrid soundtrack: three prepared ElevenLabs recordings through the existing audio controls,
+with a quiet dungeon ambience bed and retained synthesized effects. Other levels retain their
+procedural music. See the [dungeon audio direction](docs/design/levels/ashen-crypt-audio.md).
 
 **Emberfall — Riverside Village** is the playable demo: a small, dense village at golden hour, with
 a windmill on the hill, a waterfall, a river and bridge, a farm, an autumn grove with a pond and a

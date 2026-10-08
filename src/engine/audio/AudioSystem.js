@@ -1,9 +1,10 @@
 import { clamp, mulberry32 } from '../utils/math.js';
 import { ownValue } from '../utils/own.js';
+import { RecordedMusic } from './RecordedMusic.js';
 
 /**
- * AudioSystem — fully procedural WebAudio: UI/gameplay SFX, layered ambience and a gentle
- * harp-and-strings folk loop in the spirit of Octopath Traveler's town themes. No audio files.
+ * AudioSystem — synthesized WebAudio effects/ambience/music, with optional prepared recordings
+ * sharing the same context and buses. Existing procedural defaults are unchanged.
  *
  * Nothing touches WebAudio until `unlock()` (call it from a user gesture). Before that every
  * method is a silent no-op, but ambience levels and "music wanted" are remembered and applied
@@ -43,12 +44,12 @@ export const MUSIC_TRACKS = Object.freeze(['emberfall', 'battle', 'boss']);
 /** Stingers accepted by `playStinger` (played over the music on the music bus). */
 export const MUSIC_STINGERS = Object.freeze(['victory', 'levelup']);
 /** Ambience layer names accepted by `setAmbience`. */
-export const AMBIENCE_LAYERS = Object.freeze(['wind', 'birds', 'crickets', 'fire', 'water']);
+export const AMBIENCE_LAYERS = Object.freeze(['wind', 'birds', 'crickets', 'fire', 'water', 'dungeon']);
 
 const mtof = (m) => 440 * 2 ** ((m - 69) / 12);
 
 /** Per-layer loudness at level 1 (before the ambience bus). */
-const LAYER_GAIN = { wind: 0.62, birds: 1.5, crickets: 0.95, fire: 0.29, water: 0.62 };
+const LAYER_GAIN = { wind: 0.62, birds: 1.5, crickets: 0.95, fire: 0.29, water: 0.62, dungeon: 0.3 };
 
 /** Internal make-up gain per bus so the public 0..1 volumes land at sensible loudness. */
 const BUS_TRIM = { music: 2.4, sfx: 1.9, amb: 1.5 };
@@ -388,11 +389,12 @@ export class AudioSystem {
     this.bpm = bpm;
 
     this._rng = mulberry32(0x5eed1);
-    this._ambTargets = { wind: 0, birds: 0, crickets: 0, fire: 0, water: 0 };
+    this._ambTargets = { wind: 0, birds: 0, crickets: 0, fire: 0, water: 0, dungeon: 0 };
     this._ambFade = 2.5;
     this._layers = {};
     this._musicWanted = false;
     this._music = null;
+    this.recordings = new RecordedMusic(this);
     /** @type {Record<string, number>} last start time by sfx name (no prototype: a well's `sfx` is level data) */
     this._lastSfx = Object.create(null);
     this._voices = 0;
@@ -414,6 +416,8 @@ export class AudioSystem {
     this._tracks = new Map();
     /** @type {Map<string, ReturnType<typeof buildStinger>>} stingers, built on first use */
     this._stingers = new Map();
+    /** Active cue outputs, so M and disposal also silence already scheduled music cues. */
+    this._stingerOutputs = new Set();
     /** Seeded RNG of the combat SFX (their noise offsets and tiny variations). */
     this._crng = mulberry32(0xc0ba7);
     /** Shared stereo panners of the combat SFX ({ dry, wet } × 9 positions), created on first use. */
@@ -451,6 +455,7 @@ export class AudioSystem {
         }
       }
       this._build();
+      if (this.recordings.catalog.size) this.prepareMusic();
     }
     const ctx = this.ctx;
     if (this._offline) return Promise.resolve(true);
@@ -527,6 +532,9 @@ export class AudioSystem {
   dispose() {
     if (this._disposed) return;
     this._disposed = true;
+    this.recordings.dispose();
+    for (const out of this._stingerOutputs) out.disconnect();
+    this._stingerOutputs.clear();
     if (this._timer !== null) clearInterval(this._timer);
     this._timer = null;
     if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', this._onVisibility);
@@ -1386,7 +1394,7 @@ export class AudioSystem {
 
   /**
    * Set ambience layer levels (0..1). Only the given layers change; they crossfade smoothly.
-   * @param {{ wind?: number, birds?: number, crickets?: number, fire?: number, water?: number }} levels
+   * @param {{ wind?: number, birds?: number, crickets?: number, fire?: number, water?: number, dungeon?: number }} levels
    * @param {{ replace?: boolean, fade?: number }} [opts] replace: layers not mentioned fade to 0;
    *   fade: approximate crossfade time in seconds (2.5)
    */
@@ -1453,6 +1461,19 @@ export class AudioSystem {
     const r = this._rng;
 
     switch (name) {
+      case 'dungeon': {
+        // Quiet stone-room air / distant rumble; no wildlife or unlocated drip events.
+        // Fixed offsets keep the original music/ambience RNG sequence untouched.
+        const s = src(this._brown, 0.67, 1.7);
+        const hp = add(this._biquad('highpass', 75, 0.7));
+        const lp = add(this._biquad('lowpass', 480, 0.6));
+        const room = add(ctx.createGain());
+        room.gain.value = 0.75;
+        s.connect(hp).connect(lp).connect(room).connect(gain);
+        lfo(0.037, 0.18, room.gain);
+        lfo(0.023, 90, lp.frequency);
+        break;
+      }
       case 'wind': {
         const s1 = src(this._brown, 1, r() * 5);
         const bp = add(this._biquad('bandpass', 380, 0.65));
@@ -1728,6 +1749,15 @@ export class AudioSystem {
   // Music
   // ---------------------------------------------------------------------------
 
+  /** @param {Record<string, import('./RecordedMusic.js').Recording>} catalog */
+  registerRecordedMusic(catalog) { this.recordings.register(catalog); }
+
+  /** Fetch prepared assets during loading; decoding waits until the audio context exists. */
+  prepareMusic() { return this.recordings.prepare(); }
+
+  /** File playback diagnostics for acceptance checks. */
+  get recordedMusicState() { return this.recordings.state(); }
+
   /**
    * Start music with a fade-in. If called before `unlock()`, playback begins as soon as the
    * context is unlocked.
@@ -1741,7 +1771,8 @@ export class AudioSystem {
    */
   startMusic({ fade = 2.5, track } = {}) {
     const want = track ?? this._musicTrackWanted;
-    if (!MUSIC_TRACKS.includes(want)) {
+    const recording = this.recordings.catalog.get(want);
+    if (!MUSIC_TRACKS.includes(want) && !recording) {
       this._warnMusic(`unknown music track "${want}"`);
       return;
     }
@@ -1758,7 +1789,28 @@ export class AudioSystem {
       this._stopInstance(cur, fade); // crossfade: fades out while the new track fades in
     }
     const now = this.ctx.currentTime;
-    this._music = want === 'emberfall' ? this._startSong(now, fade) : this._startCombatTrack(want, now, fade);
+    if (recording) {
+      const voice = this.recordings.start(want, now, fade, this._sectionWanted ?? 'A');
+      if (voice) {
+        this._music = voice;
+      } else {
+        const fallback = recording.fallback;
+        const m = fallback === 'emberfall' ? this._startSong(now, fade) : this._startCombatTrack(fallback, now, fade);
+        m.track = want;
+        m.recordedFallback = true;
+        this._music = m;
+        this.recordings.load(want).then((buffer) => {
+          // No late start after M, death, victory, disposal or a superseding track request.
+          if (!buffer || this._disposed || !this._musicWanted || this._music !== m) return;
+          const next = this.recordings.start(want, this.ctx.currentTime, 1.2, this._sectionWanted ?? 'A');
+          if (!next) return;
+          this._stopInstance(m, 1.2);
+          this._music = next;
+        });
+      }
+    } else {
+      this._music = want === 'emberfall' ? this._startSong(now, fade) : this._startCombatTrack(want, now, fade);
+    }
     this._scheduleMusic(now);
   }
 
@@ -1868,6 +1920,11 @@ export class AudioSystem {
    */
   stopMusic({ fade = 2.5 } = {}) {
     this._musicWanted = false;
+    if (this.ctx) for (const out of this._stingerOutputs) {
+      const now = this.ctx.currentTime;
+      out.gain.cancelAndHoldAtTime(now);
+      out.gain.linearRampToValueAtTime(0, now + Math.max(0.05, fade));
+    }
     const m = this._music;
     if (!m || !this.ctx) return;
     this._music = null;
@@ -1876,6 +1933,7 @@ export class AudioSystem {
 
   /** @internal the stop path: fade an instance out, stop scheduling it, disconnect it later */
   _stopInstance(m, fade) {
+    if (m.recorded) { this.recordings.stop(m, fade); return; }
     m.stopping = true;
     const now = this.ctx.currentTime;
     const g = m.out.gain;
@@ -1918,6 +1976,16 @@ export class AudioSystem {
    * @param {string} name
    */
   setMusicSection(name) {
+    const recording = this.recordings.catalog.get(this._musicTrackWanted);
+    if (recording) {
+      if (!Object.hasOwn(recording.sections ?? {}, name)) return;
+      this._sectionWanted = name;
+      const m = this._music;
+      if (!m?.recorded || m.stopping || m.sectionName === name) return;
+      const next = this.recordings.start(m.track, this.ctx.currentTime, 1.2, name);
+      if (next) { this._stopInstance(m, 1.2); this._music = next; }
+      return;
+    }
     const def = COMBAT_TRACKS[this._musicTrackWanted];
     if (!def || !def.sections[name]) return;
     this._sectionWanted = name;
@@ -1972,6 +2040,7 @@ export class AudioSystem {
     const dur = st.lengthBeats * beat;
     const out = ctx.createGain();
     out.gain.value = Math.max(0, volume);
+    this._stingerOutputs.add(out);
     out.connect(this._buses.music);
     const send = ctx.createGain();
     send.gain.value = 0.55;
@@ -2007,6 +2076,7 @@ export class AudioSystem {
     }
     if (!this._offline) {
       setTimeout(() => {
+        this._stingerOutputs.delete(out);
         for (const n of [harpBus, fluteBus, send, out]) {
           try {
             n.disconnect();
@@ -2035,7 +2105,7 @@ export class AudioSystem {
 
   _scheduleMusic(now) {
     const m = this._music;
-    if (!m || m.stopping) return;
+    if (!m || m.stopping || m.recorded) return;
     const beat = 60 / m.bpm;
     const ahead = now + LOOKAHEAD;
     let guard = 0;

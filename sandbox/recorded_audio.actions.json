@@ -1,0 +1,4 @@
+[
+  { "eval": "window.__recordedAudio.run().then(r=>JSON.stringify(r))" },
+  { "shot": "acceptance" }
+]

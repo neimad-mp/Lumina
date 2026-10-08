@@ -331,6 +331,10 @@ is a `bridge` **object** whose deck is walkable. Both are specified in
 
 ## 9. Environment
 
+`environment.audioProfile: 'ashen-crypt'` opts into the prepared dungeon soundtrack and room
+ambience mix. Missing/unknown values retain the existing procedural soundtrack. This optional
+field is not in defaults, is preserved by editing/serialization and has no inspector control.
+
 `environment` holds presentation and gameplay options. Normalisation fills in the ten defaults of
 `DEFAULT_ENVIRONMENT`; all other fields are optional and **absent means the game's automatic
 choice**. Unknown keys are kept. Values are not type-checked on load: the game ignores invalid
