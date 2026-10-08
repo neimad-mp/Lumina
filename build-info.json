@@ -1,0 +1,15 @@
+{
+  "name": "Lumina - Ashen Crypt hybrid audio playtest",
+  "date": "2026-10-09",
+  "sourceRevision": "69c70a5aabeef0a6c7b3e25c99290aeae9deb133",
+  "defaultLevel": "ashen-crypt",
+  "base": "./",
+  "url": "https://neimad-mp.github.io/Lumina/",
+  "generationCredits": 5400,
+  "music": [
+    "exploration",
+    "battle",
+    "boss"
+  ],
+  "humanListeningReview": "Pending playtest; automated checks do not certify arrangement or listening quality."
+}

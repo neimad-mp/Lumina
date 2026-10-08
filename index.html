@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emberfall — Lumina HD-2D Engine</title>
+  <meta name="description" content="Emberfall — Riverside Village: an HD-2D diorama built with the Lumina engine on three.js." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' rx='3' fill='%23140f17'/%3E%3Cpath fill='%23c9a45c' d='M7 2h2v1h1v2h1v2h1v4h-1v1h-1v1H6v-1H5v-1H4V7h1V5h1V3h1z'/%3E%3Cpath fill='%23f59a2e' d='M7 5h2v2h1v3H9v1H7v-1H6V7h1z'/%3E%3Cpath fill='%23fff6d0' d='M7 8h2v2H7z'/%3E%3C/svg%3E" />
+  <style>html,body{background:#000;height:100%;margin:0;overflow:hidden}#app{background:#000;position:fixed;inset:0;overflow:hidden}#app canvas{width:100%;height:100%;display:block}#loading{z-index:1000;color:#d9c18a;letter-spacing:.32em;text-transform:uppercase;background:radial-gradient(at 50% 55%,#17121c 0%,#050407 70%);place-items:center;font:400 13px/1.4 Georgia,Times New Roman,serif;transition:opacity .85s;display:grid;position:fixed;inset:0}#loading.is-done{opacity:0;pointer-events:none}#loading .inner{justify-items:center;gap:18px;display:grid}#loading .ember{background:#f59a2e;width:10px;height:10px;animation:1.8s ease-in-out infinite ember;transform:rotate(45deg);box-shadow:0 0 12px 3px #f59a2e8c,0 0 36px 10px #f5782e2e}#loading .title{letter-spacing:.5em;color:#ead9a6;margin-right:-.5em;font-size:20px}#loading .bar{background:#c9a45c38;width:min(280px,60vw);height:1px;overflow:hidden}#loading .bar>i{transform-origin:0;background:linear-gradient(90deg,#8a6a2c,#f2d072);height:100%;transition:transform .35s;display:block;transform:scaleX(.02)}#loading .label{color:#d9c18a99;letter-spacing:.24em;font-size:11px}#loading.is-error .label{color:#e0674f;text-align:center;text-transform:none;letter-spacing:.08em;max-width:min(640px,86vw);line-height:1.7}#loading.is-error .ember{box-shadow:none;background:#7a3a2e;animation:none}#loading .actions{gap:28px;margin-top:10px;display:none}#loading.is-error .actions{display:flex}#loading .actions a{color:#d9c18a;letter-spacing:.24em;border-bottom:1px solid #c9a45c4d;padding:6px 2px;font-size:11px;text-decoration:none;transition:color .2s,border-color .2s}#loading .actions a:hover,#loading .actions a:focus-visible{color:#f2d072;border-color:#f2d072;outline:none}@keyframes ember{0%,to{opacity:.75;transform:rotate(45deg)scale(.9)}50%{opacity:1;transform:rotate(45deg)scale(1.15)}}@media (prefers-reduced-motion:reduce){#loading .ember{animation:none}}</style>
+  <script type="module" crossorigin src="./assets/main-7_b37Vtg.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/LevelStorage-BTzK5DyF.js">
+  <link rel="modulepreload" crossorigin href="./assets/WeatherLook-Bhc21ADN.js">
+  <link rel="stylesheet" crossorigin href="./assets/LevelStorage-UvDx4yN3.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-Bee4wk6n.css">
+</head>
+<body>
+  <div id="app"></div>
+  <div id="loading" role="status" aria-live="polite">
+    <div class="inner">
+      <div class="ember"></div>
+      <div class="title">Emberfall</div>
+      <div class="bar"><i></i></div>
+      <div class="label">Loading</div>
+      <div class="actions"></div>
+    </div>
+  </div>
+</body>
+</html>

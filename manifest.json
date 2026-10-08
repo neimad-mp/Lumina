@@ -1,0 +1,380 @@
+{
+  "sourceRevision": "69c70a5aabeef0a6c7b3e25c99290aeae9deb133",
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "assets/cinzel-latin-400-normal-C8jUSQqm.woff",
+      "bytes": 16616,
+      "sha256": "99c6477f06f0c717d31f2bb41013582c347be65366179d5726d107ad908ff3b0"
+    },
+    {
+      "path": "assets/cinzel-latin-400-normal-DnUIPmzd.woff2",
+      "bytes": 14128,
+      "sha256": "b873cdd90d6bd9ca4793c805b4175abfae00b3611ee8afccf63067133dcf1217"
+    },
+    {
+      "path": "assets/cinzel-latin-600-normal-CH_LB4su.woff",
+      "bytes": 17504,
+      "sha256": "7cffb40d1c02861fd0f2fedf9446f36b9d38ce312c723927667ebcffc8690894"
+    },
+    {
+      "path": "assets/cinzel-latin-600-normal-Dd5YO2UX.woff2",
+      "bytes": 15204,
+      "sha256": "61efc27ceb7d08bb841652fa8979c0b6833b92548b7f9544c07968a6c02f28e4"
+    },
+    {
+      "path": "assets/cinzel-latin-700-normal-C-gK7hA8.woff",
+      "bytes": 17524,
+      "sha256": "83ea41e439a253b4d436cc895d07a0d47f714c4816a23e86df35c442eddffafb"
+    },
+    {
+      "path": "assets/cinzel-latin-700-normal-Dkw14w9r.woff2",
+      "bytes": 15184,
+      "sha256": "8efa224fe70fef188a39c095e218b81fd31061809f2752537e33a9ec7b9c2263"
+    },
+    {
+      "path": "assets/cinzel-latin-ext-400-normal-DJ0Lq8y-.woff",
+      "bytes": 9292,
+      "sha256": "92a7ae1bae4213eff4bd574b5d0161b11fa226b70d299716b1870fdd076ba027"
+    },
+    {
+      "path": "assets/cinzel-latin-ext-400-normal-XQK_CSAr.woff2",
+      "bytes": 7856,
+      "sha256": "4fc5b16d66f7ec618140abe75294dfb615c34ab2d824bd8a67691af58ddf6640"
+    },
+    {
+      "path": "assets/cinzel-latin-ext-600-normal-BEFdM_VE.woff2",
+      "bytes": 8352,
+      "sha256": "a5779eb98b5046090f99169b529743e356b452909295ad7db4cb70011e0425e0"
+    },
+    {
+      "path": "assets/cinzel-latin-ext-600-normal-BY9Mq9iK.woff",
+      "bytes": 9780,
+      "sha256": "a63b4e0285c06622db095f5847f25b4577ef2f9c1b3d6efbd9a71dbb0d80fd6e"
+    },
+    {
+      "path": "assets/cinzel-latin-ext-700-normal-C24KFjuG.woff2",
+      "bytes": 8256,
+      "sha256": "55b110958b9b614a410cf607c12b1ff2990fa3e5bd0bfacf17e5fd7dce681562"
+    },
+    {
+      "path": "assets/cinzel-latin-ext-700-normal-CORa-yIv.woff",
+      "bytes": 9812,
+      "sha256": "dd34984698f3fa925365b89530fdfdfe9fa70ee2f681b233f267491145c8ecbd"
+    },
+    {
+      "path": "assets/CombatSystem-BRvuyBlr.js",
+      "bytes": 232463,
+      "sha256": "6348edcadbd8b6d377553e39b55e60fc1a4411aac6ff6c5a09552e9cdc10d866"
+    },
+    {
+      "path": "assets/CombatSystem-Vw8OzNJE.css",
+      "bytes": 26521,
+      "sha256": "7534ec753b499a8bfb126b191ceb9340a2a0b6401d7c877319eaf165e08d5160"
+    },
+    {
+      "path": "assets/crimson-pro-latin-400-italic-BJbyz_Tg.woff2",
+      "bytes": 19104,
+      "sha256": "1fac78d865686e4e1236e5e599f02c8afe05dd59d04344553cc45a160d53ac63"
+    },
+    {
+      "path": "assets/crimson-pro-latin-400-italic-iL-nM4zC.woff",
+      "bytes": 24060,
+      "sha256": "58ef66d4a83daf7450f5ac97edf5f1cc048c90c26a9f96e0d66f6e214dd3e9cc"
+    },
+    {
+      "path": "assets/crimson-pro-latin-400-normal-B4SlG4wx.woff2",
+      "bytes": 18336,
+      "sha256": "d2a3a146387d91b8d476d508849dd1d93a3cbde85d1e0d303e3d5c970726a703"
+    },
+    {
+      "path": "assets/crimson-pro-latin-400-normal-BzhyrSeK.woff",
+      "bytes": 22932,
+      "sha256": "94d4c8515bdefad72f0df38ef7fc1f42253b60ef5722075b4df6c65ad9b92f94"
+    },
+    {
+      "path": "assets/crimson-pro-latin-500-normal-BCdZ5465.woff",
+      "bytes": 23440,
+      "sha256": "6a2ad7a2590b8f7471978ae7d4a12668abdb4f33f94f8d0c3b692299980180d3"
+    },
+    {
+      "path": "assets/crimson-pro-latin-500-normal-D6GH0edE.woff2",
+      "bytes": 18868,
+      "sha256": "7d264f53a589d61475041f980a2f35a88cde1ec7012a8f661419e99769492684"
+    },
+    {
+      "path": "assets/crimson-pro-latin-600-italic-BakNTb1A.woff2",
+      "bytes": 19340,
+      "sha256": "cc652c646593506722b059d8151ef80586f235606e37ef4c1863df3e3183ed78"
+    },
+    {
+      "path": "assets/crimson-pro-latin-600-italic-zVy8ft4A.woff",
+      "bytes": 24260,
+      "sha256": "0af4ea64c63f1a17133f08b6b866320ce7787f0e33f5a69c12295721128d44eb"
+    },
+    {
+      "path": "assets/crimson-pro-latin-600-normal-Ca4fy0Cf.woff",
+      "bytes": 23360,
+      "sha256": "33ab73313a9c4ac3040abfe33dbd6f830e17018f1deefbef7d488e733339e22d"
+    },
+    {
+      "path": "assets/crimson-pro-latin-600-normal-vJ8oEdKU.woff2",
+      "bytes": 18776,
+      "sha256": "2d8f33b2352a04f3ed3af648df66d053c00d5c3ccbe793797273509824a5044a"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-400-italic-C6Jf9c7d.woff2",
+      "bytes": 15540,
+      "sha256": "d567f93b8ef2fdc5e38ef0a5d673e9e7a1500fbf3fa11761a04aae2cbb763295"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-400-italic-DuC2towc.woff",
+      "bytes": 21156,
+      "sha256": "9d8b04a9897478d0b4a11af098b4f53f5342115e63542eb6b798aff577880e05"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-400-normal-B3ID4PT2.woff2",
+      "bytes": 15216,
+      "sha256": "fa39b28ba18ffac71ca8dad08e94cce160af7179f24662ff1beea3bdecc15b9c"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-400-normal-BWiDT69a.woff",
+      "bytes": 20460,
+      "sha256": "76e8d7de1ce49881d69ba3121882742336f615c38ed2c869b1a670b26cabd5aa"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-500-normal-Cu9CDuc4.woff2",
+      "bytes": 15196,
+      "sha256": "7c01941ce4dd82d32c9ecab14ee0045389c2c61044a2f4b7c3e56775146e482f"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-500-normal-CUkD1wcf.woff",
+      "bytes": 20572,
+      "sha256": "f2ad06f370b2aba69f9d3f155da901320fd928a69caa041c616e320caae330d5"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-600-italic-8LTxABEP.woff",
+      "bytes": 21220,
+      "sha256": "2873672557fc3ff73cbd34e8bdbe177f579f025a5f349934c2b976b39f7ccf77"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-600-italic-DV4bqg0I.woff2",
+      "bytes": 15544,
+      "sha256": "b9c71501215a902ee3ac651bca11130c62add9d4003e55b6a2ccb6da8386f0c3"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-600-normal-ChXPf8Fx.woff",
+      "bytes": 20680,
+      "sha256": "25c8b5e635e72fe5ca28909d85cae6da2e5d2669b3204509547cb6dd652e2b89"
+    },
+    {
+      "path": "assets/crimson-pro-latin-ext-600-normal-DTIcmTiA.woff2",
+      "bytes": 15276,
+      "sha256": "b5c66a1f84acb56d424405670ec397e5d3b6838c26049d9ec611ed6625589b6a"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-400-italic-NXtqStND.woff2",
+      "bytes": 5960,
+      "sha256": "8f475a43b09c3f0c94819abdd07055fb92cb4b0db7aedffe710f885fa2940ca7"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-400-italic-XRYdg6KH.woff",
+      "bytes": 7760,
+      "sha256": "89299923b785c9a9fd39616364772c9fa044559985c350c218b383dabaa337a8"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-400-normal-C3m3Wqkz.woff2",
+      "bytes": 5752,
+      "sha256": "87d6736ff81966d0d1e634add4fc4af20ead113204357388317e2032a4669be2"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-400-normal-CEHt5KbE.woff",
+      "bytes": 7492,
+      "sha256": "e08cefacd792bf6496a380926d24a9a789bb9b5ecd1db10aaaa6765c5615e433"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-500-normal-Ccm9dO69.woff2",
+      "bytes": 5860,
+      "sha256": "e52082f291ba87909fe606a1e73d51801dc3ac430235cf464ac22ae15bf02f2c"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-500-normal-Cnk_aPx5.woff",
+      "bytes": 7576,
+      "sha256": "1e9691167fe091581f46cdfb64e92b170d80ed506d675ccd47ed8b6ab0eb1a13"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-600-italic-BkfqJYsT.woff",
+      "bytes": 7764,
+      "sha256": "e3937a4912c105af6ee3fbc04ea10ba6bb6ebd0a0217ef94ac582cd68620b18d"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-600-italic-Gei94Lge.woff2",
+      "bytes": 5984,
+      "sha256": "65fb04703d34ad9b4e211afe431747a30f0fb9305b7658e8032434861e14314c"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-600-normal-BD5z241x.woff2",
+      "bytes": 5852,
+      "sha256": "a0478ccef8cc338f28ff145dbe33a7fbd733c9b9645a45788a8193d90226ea56"
+    },
+    {
+      "path": "assets/crimson-pro-vietnamese-600-normal-WXpto_XS.woff",
+      "bytes": 7564,
+      "sha256": "3016a823b2fbd7d2e6ae5eace6250f64ca1c5d18165ea58fb85717a2e4385804"
+    },
+    {
+      "path": "assets/defs-BMgv2l4N.js",
+      "bytes": 31152,
+      "sha256": "44a47b2bf8dce3d0054c279536860affe46052cde818aa617a07169d04e5e14c"
+    },
+    {
+      "path": "assets/editor-BjrrPcro.css",
+      "bytes": 41277,
+      "sha256": "a585f2405c89eadd5ea07393c8dc02ad2105b927f1e5f9da4cad677b4004e070"
+    },
+    {
+      "path": "assets/editor-CXKv_61V.js",
+      "bytes": 233188,
+      "sha256": "066eb6d9e6c0a8ec07692361b6f4cb780d3a9436448a202d30dac4f429c73360"
+    },
+    {
+      "path": "assets/LevelStorage-BTzK5DyF.js",
+      "bytes": 331519,
+      "sha256": "dc850b3a3df77a4cfed0d96205c9bf150dfcfa74bf6bafc4bab7a00fbd4506a8"
+    },
+    {
+      "path": "assets/LevelStorage-UvDx4yN3.css",
+      "bytes": 750,
+      "sha256": "50af6afc8d3e098ed312e349f034e7acde6028b0732034788e384f58dd05e4b3"
+    },
+    {
+      "path": "assets/main-7_b37Vtg.js",
+      "bytes": 231498,
+      "sha256": "19ecf919ba308a8f192ca77b4f50bc27361d83b58e62584af00a19a7b1648377"
+    },
+    {
+      "path": "assets/main-Bee4wk6n.css",
+      "bytes": 52290,
+      "sha256": "2aaa15559842e62e77a8c47dfbf2cd8ac1ddaea909030003a78de780ce9430ba"
+    },
+    {
+      "path": "assets/pixelify-sans-cyrillic-400-normal-DfOZNMlW.woff",
+      "bytes": 4412,
+      "sha256": "4c0e92c10863c2e6a0143593fb0172fc013681d403c8114567610ee775a4e0ff"
+    },
+    {
+      "path": "assets/pixelify-sans-latin-400-normal-DLrIX9QE.woff2",
+      "bytes": 7692,
+      "sha256": "d830612ac9131788ebae754b9268f83f7c1d3ffa9bc0f9a5514207a8283fe71e"
+    },
+    {
+      "path": "assets/pixelify-sans-latin-400-normal-JapMNN6Z.woff",
+      "bytes": 10264,
+      "sha256": "60603c6e85cc8ba29a235657dfc0ff9012bae9adcdbc40cd9056a8cb68a9864c"
+    },
+    {
+      "path": "assets/pixelify-sans-latin-ext-400-normal-BkfTUL4s.woff",
+      "bytes": 7440,
+      "sha256": "595844088d5a5f11cb3921926289f5430b08602057695f73d704bc971a5378cb"
+    },
+    {
+      "path": "assets/pixelify-sans-latin-ext-400-normal-DdH6zlBQ.woff2",
+      "bytes": 5360,
+      "sha256": "b3adb19d68a00dba6caa8b5cbc5a973f1a0a8ae010c576042b3f5e2915499250"
+    },
+    {
+      "path": "assets/shoreWorker-CWjE-yRZ.js",
+      "bytes": 2986,
+      "sha256": "79f591b87a2f8cb360208c85d75c9326e3b09fd6c56d954137a67863754d665d"
+    },
+    {
+      "path": "assets/Viewport3D-44WsxdHX.js",
+      "bytes": 162507,
+      "sha256": "9c3111388d360d41d6dd0a4d56ea4ecff2c79e744192eb8fe787a0d46e5e4d03"
+    },
+    {
+      "path": "assets/WeatherLook-Bhc21ADN.js",
+      "bytes": 777688,
+      "sha256": "4d2d5f2aa802b9d3850d82e7d9ecb9c39004e28413fbd9e7083bfa601b6aa299"
+    },
+    {
+      "path": "audio/ashen-crypt/battle.ogg",
+      "bytes": 1870472,
+      "sha256": "2617a9caf0d5674dfdd8420d0d666bba236356230a8f8fc4a1b560993eaf225c"
+    },
+    {
+      "path": "audio/ashen-crypt/boss.ogg",
+      "bytes": 2085305,
+      "sha256": "5e832a5da1688f03260f470a1053318168aa959d21f6dfd9d466f3b87687dbc9"
+    },
+    {
+      "path": "audio/ashen-crypt/catalog.json",
+      "bytes": 8378,
+      "sha256": "ad829868401548a66fb01e7f36701b103fad4f49f8e0d8453b49014d1c2f2bf8"
+    },
+    {
+      "path": "audio/ashen-crypt/exploration.ogg",
+      "bytes": 1759255,
+      "sha256": "b1fca9823616479a71f8b935be9da69e2e7068502a8467b5b0ca0ff3d5aaa157"
+    },
+    {
+      "path": "build-info.json",
+      "bytes": 463,
+      "sha256": "1a99e9b438aea181dbbd60da3487280f98492d1cf828fc9e054cd59d31c88330"
+    },
+    {
+      "path": "editor.html",
+      "bytes": 2998,
+      "sha256": "7ed99e78e55f0c27043ac3038c1a58a3462a2f20b986d77abd253c1967756485"
+    },
+    {
+      "path": "index.html",
+      "bytes": 3406,
+      "sha256": "cf09515ba2e54016f4a70e6f0b4d4ca56004db44a36b939cbf729e7af6fd7dff"
+    },
+    {
+      "path": "levels/ashen-crypt.json",
+      "bytes": 23232,
+      "sha256": "6f61d475715ae6e0de30fc9d1d576502974567220fe311e99dfacf0560391b28"
+    },
+    {
+      "path": "levels/brightwater-crossing.json",
+      "bytes": 15213,
+      "sha256": "8df0412b39683802b147cfc8521198b0c86264cc3c35f5ba34085294a1ca74ea"
+    },
+    {
+      "path": "levels/cinderwatch-pass.json",
+      "bytes": 63686,
+      "sha256": "4de1cae62d7570483728cb2d29226d03f3c0653b77c0f5e0ea05c0dcb6156ccb"
+    },
+    {
+      "path": "levels/emberfall.json",
+      "bytes": 28640,
+      "sha256": "8222f9def323d5d37976bec1351d520d7cb628f6f48c4d70f79c0dcaf732fa4c"
+    },
+    {
+      "path": "levels/gildhaven.json",
+      "bytes": 137675,
+      "sha256": "899472cc23edc75fea0a7613af0cd6b511d705f586a48cbb2925eed9f21a8436"
+    },
+    {
+      "path": "levels/sample-hamlet.json",
+      "bytes": 9834,
+      "sha256": "4659ca777bb5fe5177290b248425d88514e0334c8daa6fd12d851e14627a2e7f"
+    },
+    {
+      "path": "levels/starfall-vale.json",
+      "bytes": 167073,
+      "sha256": "b74c60bf50720e90bc02970ae9bd46cb724ff8796f9871fb410c8523b6c88ffd"
+    },
+    {
+      "path": "PLAYTEST.txt",
+      "bytes": 1127,
+      "sha256": "46f7ed8d82921058a8f535e0b6ff6b5b664627ee8f3c8bd81bdb5340952a9096"
+    }
+  ]
+}

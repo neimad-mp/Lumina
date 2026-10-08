@@ -1,0 +1,18 @@
+LUMINA - ASHEN CRYPT PLAYTEST | 2026-10-09
+
+Play and share: https://neimad-mp.github.io/Lumina/
+Desktop keyboard and mouse. Chrome or Edge recommended for this verified build.
+Press Space or click the title screen to begin and enable audio.
+WASD move; J/left mouse attack; K/right mouse dodge; U/I/O skills; C healing draught.
+Space interact/rest/open; M music on/off; H hide/show controls. Controls also appear in-game.
+
+Please review exploration, ordinary combat, both Warden music phases, victory and respawn.
+Feedback sought: atmosphere, repetition/loop joins, music loudness and clear attack warnings.
+
+ZIP: extract all files, then serve this folder over HTTP or upload its contents to a static host.
+For a local Python installation: python -m http.server 8080
+Open http://localhost:8080/ . Opening index.html as file:// cannot load the game assets.
+The editor is included at editor.html; server-side project saving is available only in development.
+
+All music is packaged locally; no ElevenLabs account, API key or runtime generation is needed.
+Source revision: 69c70a5aabeef0a6c7b3e25c99290aeae9deb133
