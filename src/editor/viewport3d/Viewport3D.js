@@ -11,7 +11,7 @@ import { clamp, DEG2RAD } from '../../engine/utils/math.js';
 import * as DEMO from '../../demo/config.js';
 import {
   weatherName, settledWeather, settledSnowCover, precipitationEmitter, precipitationIntensity, applyWeatherLighting,
-  applyWeatherWind, applyWeatherGrade, applyOvercast, applyLampDayGlow, applyEmissiveDay, glassLevel, areaEmitterIntensity,
+  applyWeatherWind, applyWeatherGrade, applyOvercast, applyLampDayGlow, applyEmissiveDay, glassLevel, areaEmitterIntensity, levelLook, applyLevelLook,
 } from '../../demo/WeatherLook.js';
 import { snowCover } from '../../demo/SnowCover.js';
 import { EditorCamera } from './EditorCamera.js';
@@ -1401,7 +1401,8 @@ export class Viewport3D {
     const atmo = !!(this.particles && this._view?.atmosphere);
     // lighting: fixed time, editing fog scaled with the view distance, shadows sized to the view
     const L = this.lighting;
-    applyWeatherLighting(L.settings, w);
+    const look = levelLook(st.level.environment);
+    applyWeatherLighting(L.settings, w, look);
     const base = Math.max(1e-4, L.state.fogDensity);
     const fogScale = cam.mode === 'game' ? 0.55 : 1;
     // (the edit fog ignores the palette's density; the weather's haze only with the atmosphere)
@@ -1413,12 +1414,13 @@ export class Viewport3D {
     applyEmissiveDay(this.props.emissiveEntries, w.overcast);
     L.update(dt);
     applyOvercast(L, w.overcast);
+    applyLevelLook(L, st.level.environment);
     // lantern glass (the props' shared material): the game's level — its bright amber albedo
     // dimmed while the lamps are unlit, i.e. by day under a clear sky
     this._glassMaterial ??= this.props.builder.factory.glassMaterial();
     this._glassMaterial.color.setScalar(glassLevel(L.nightFactor, w.overcast));
     applyWeatherWind(w);
-    if (this.postfx) applyWeatherGrade(this.postfx.settings.grade, w, EDIT_GRADE.temperature, EDIT_GRADE.saturation);
+    if (this.postfx) applyWeatherGrade(this.postfx.settings.grade, w, EDIT_GRADE.temperature + look.temperature, EDIT_GRADE.saturation + look.saturation);
     // point lights: the engine LightPool, as the game's World.update runs it (after the lighting
     // update and the camera): ranked around the camera focus, limited to what the camera sees,
     // crossfaded; its descriptor list is rebuilt after prop changes

@@ -6,6 +6,7 @@
  */
 export const SHIPPED_LEVELS = Object.freeze([
   Object.freeze({ value: 'emberfall', label: 'Emberfall' }),
+  Object.freeze({ value: 'ashen-crypt', label: 'Ashen Crypt' }),
   Object.freeze({ value: 'cinderwatch-pass', label: 'Cinderwatch Pass' }),
   Object.freeze({ value: 'starfall-vale', label: 'Starfall Vale' }),
   Object.freeze({ value: 'gildhaven', label: 'Gildhaven' }),

@@ -21,10 +21,13 @@ Continue Lumina as a darker Diablo-inspired ARPG / dungeon crawler, drawing on t
 MU Online (2003) inspirations: iconic wings, visually glowing equipment tiers, item refining
 from +0 to +15, upgrade jewels as valuable currency items, and fast dark-fantasy combat.
 
-These are direction and feature goals, not claims about the current implementation. The user
-wants visual examples before choosing between the existing HD-2D presentation and 3D characters.
-Do not assume a rendering rewrite, networking model, class system, refining failure rules,
-or production asset pipeline. Resolve those choices with the user before implementing them.
+The user selected **Dark HD-2D** after reviewing visual examples: keep pixel-art characters in
+lit 3D environments. Target **single-player first**. The first milestone is **a dark dungeon**,
+built on the existing combat and procedural asset pipeline.
+
+Wings, equipment glow, +0 to +15 refining and upgrade jewels are future feature goals, not
+claims about current implementation. Do not assume a class system, refining failure rules,
+multiplayer architecture or a replacement production asset pipeline; agree those separately.
 
 ## Read first
 

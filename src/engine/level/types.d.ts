@@ -227,6 +227,10 @@ export interface LevelEnvironment
   minimap?: boolean;
   /** Combat: absent = auto (on iff an `enemy` exists), true / false force it (`levelHasCombat`). */
   combat?: boolean;
+  /** Optional lighting/grade preset shared by game and editor; unknown names use the default. */
+  look?: string;
+  /** Optional level-specific boss text; absent fields retain Cinderwatch's established text. */
+  combatText?: { bossEpithet?: string; victorySubtitle?: string };
 }
 
 /** `environment.camera` (LEVEL_FORMAT.md §9.3). */

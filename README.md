@@ -1,4 +1,15 @@
-# Lumina — an HD-2D engine for three.js (This is a demo project starts from a one-shot build by Opus 5.5 and is intended for reference only.)
+# Lumina — a dark HD-2D ARPG built on three.js
+
+**Current direction (2026-10-08):** single-player first, pixel-art characters in lit 3D
+environments, and dark dungeon exploration. **Ashen Crypt — Beneath the Last Light** is the
+first playable dungeon: branching chambers, upgrade treasure, two checkpoints, a supply shop
+and the three-phase Ashen Warden. Select Ashen Crypt on the title screen or play
+`index.html?level=ashen-crypt`. See its [content contract](docs/design/levels/ashen-crypt.md).
+
+The original procedural engine and showcase levels remain available. Development happens in
+`lumina-test`; only verified work is promoted to `lumina-main`. Read [AGENTS.md](AGENTS.md).
+The project started as a procedural demo built with Opus 5.5; earlier development reports
+are preserved in `docs/history/` and the imported Git history remains intact.
 
 **Lumina** is a small engine for *HD-2D* games in the style of *Octopath Traveler II*: hand-drawn
 pixel-art sprites standing in a lit, shadowed, tilt-shift-blurred 3D diorama. It is built on
@@ -485,7 +496,7 @@ level-up, death and respawn; 121–231 draw calls in the busiest zones at zoom 3
 45 ms after warm-up (max 18 ms); load to the first gameplay frame 3.6–3.7 s from a production
 build (≈ 4.5 s cold on the dev server). Peaceful levels keep their numbers (Emberfall 57 programs,
 2.7–2.8 s production load, as before combat) and fetch no combat code chunk (the combat rules, FX
-and UI load with Cinderwatch only; ≈ 24 kB gzip of combat code still sits in shared modules).
+and UI load with combat levels only; ≈ 24 kB gzip of combat code still sits in shared modules).
 
 **Big screens:** the drawing buffer is capped at about 2.1 MP (a 2560 × 1440 window renders at
 ~1930 × 1086 and is scaled up), MSAA drops to 2× on large buffers, and a dynamic-resolution

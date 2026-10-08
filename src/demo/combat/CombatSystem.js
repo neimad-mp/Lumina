@@ -1772,8 +1772,10 @@ export class CombatSystem {
       this.projectiles.clearEnemy();
     } else if (event === 'bossAwake') {
       this._bossAwake = true;
-      this.ui.banner.show(e.name || 'Cinderheart', e.def.epithet ?? 'The Last Fire of the Pass', { duration: 3 });
-      this.ui.combat?.boss.show({ name: e.name || e.def.name, epithet: e.def.epithet ?? '', phases: 3 });
+      const text = this.game.env.combatText;
+      const epithet = typeof text?.bossEpithet === 'string' ? text.bossEpithet : (e.def.epithet ?? 'The Last Fire of the Pass');
+      this.ui.banner.show(e.name || 'Cinderheart', epithet, { duration: 3 });
+      this.ui.combat?.boss.show({ name: e.name || e.def.name, epithet: typeof text?.bossEpithet === 'string' ? text.bossEpithet : (e.def.epithet ?? ''), phases: 3 });
       this.ui.combat?.boss.set(e.hp / e.hpMax, 1);
       this.targeting.setBoss(e);
     } else if (event === 'bossPhase') {
@@ -1868,7 +1870,9 @@ export class CombatSystem {
     }
     this.events.emit('bossDefeated', e);
     // the banner once the slow motion eases, the results card 1.5 s after the stinger (§6.12)
-    this._later(0.4, () => this.ui.banner.show('Victory', 'The fires of the pass are quiet', { duration: 3.4 }));
+    const text = this.game.env.combatText;
+    const victorySubtitle = typeof text?.victorySubtitle === 'string' ? text.victorySubtitle : 'The fires of the pass are quiet';
+    this._later(0.4, () => this.ui.banner.show('Victory', victorySubtitle, { duration: 3.4 }));
     this._later(1.5, () => this._resultsCard());
     this._later(2.0, () => this.ui.combat?.boss.hide());
   }

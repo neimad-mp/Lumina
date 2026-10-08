@@ -2,6 +2,15 @@ import * as THREE from 'three';
 import { globalUniforms } from '../engine/render/GlobalUniforms.js';
 import { clamp, lerp } from '../engine/utils/math.js';
 
+// Optional level look; absence and unknown names preserve the established outdoor lighting.
+const NEUTRAL_LOOK = Object.freeze({ sunMul: 1, ambientMul: 1, exposureMul: 1, pointLightMul: 1, temperature: 0, saturation: 0 });
+const DUNGEON_LOOK = Object.freeze({ sunMul: 0.32, ambientMul: 0.78, exposureMul: 0.96, pointLightMul: 1, temperature: 0.02, saturation: -0.24 });
+
+/** @param {{ look?: string }} [environment] */
+export function levelLook(environment) {
+  return environment?.look === 'dark-dungeon' ? DUNGEON_LOOK : NEUTRAL_LOOK;
+}
+
 /** @import { LightingSystem } from '../engine/lighting/LightingSystem.js' */
 
 /**
@@ -167,6 +176,20 @@ export function applyOvercast(lighting, oc) {
   overcastColor(lighting.hemi.groundColor, oc * 0.6);
   globalUniforms.uFogColor.value.copy(lighting.fog.color);
   overcastColor(globalUniforms.uSunColor.value, oc * 0.85);
+}
+
+/** Neutral charcoal stone instead of outdoor blue moonlight; call after each lighting update.
+ * @param {LightingSystem} lighting
+ * @param {{ look?: string }} environment
+ */
+export function applyLevelLook(lighting, environment) {
+  if (environment?.look !== 'dark-dungeon') return;
+  overcastColor(lighting.fog.color, 0.85);
+  overcastColor(lighting.sun.color, 0.85);
+  overcastColor(lighting.hemi.color, 0.85);
+  overcastColor(lighting.hemi.groundColor, 0.85);
+  globalUniforms.uFogColor.value.copy(lighting.fog.color);
+  overcastColor(globalUniforms.uSunColor.value, 0.85);
 }
 
 /** Daytime brightness of the lanterns (nightOnly lights) under an overcast sky: warm accents of a grey day. */

@@ -3,7 +3,7 @@ import { snowCover } from './SnowCover.js';
 import {
   WEATHERS, WEATHER_PARAMS, WEATHER_KEYS, precipitationEmitter, precipitationIntensity, settledSnowCover,
   applyWeatherLighting, applyWeatherWind, applyWeatherGrade, applyOvercast, applyLampDayGlow, applyEmissiveDay,
-  glassLevel, areaEmitterIntensity,
+  glassLevel, areaEmitterIntensity, levelLook, applyLevelLook,
 } from './WeatherLook.js';
 
 /**
@@ -49,6 +49,13 @@ export class Weather {
       windStrength: 1, godRays: 1, dust: 1, fireflies: 1, leaves: 1, petals: 1, smoke: 1, mist: 1,
       gradeTemperature: postfx.settings.grade.temperature, gradeSaturation: postfx.settings.grade.saturation,
     };
+    const look = levelLook(world?.level?.environment);
+    this.tuning.sunMul *= look.sunMul;
+    this.tuning.ambientMul *= look.ambientMul;
+    this.tuning.exposureMul *= look.exposureMul;
+    this.tuning.pointLightMul *= look.pointLightMul;
+    this.tuning.gradeTemperature += look.temperature;
+    this.tuning.gradeSaturation += look.saturation;
     /**
      * Fog multiplier from the camera zoom (set by the game every frame): the fog start is fixed
      * (AtmosphereFog), so a zoomed-out camera would otherwise put the whole focus band deep in the
@@ -162,6 +169,7 @@ export class Weather {
     // game), so greying them here never accumulates. Rain and snow lose the golden cast.
     const oc = w.overcast;
     applyOvercast(this.lighting, oc);
+    applyLevelLook(this.lighting, this.world.level.environment);
 
     // god rays: strongest around golden hour (and a touch at dawn)
     const h = this.lighting.timeOfDay;

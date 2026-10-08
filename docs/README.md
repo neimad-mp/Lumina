@@ -24,7 +24,7 @@ with plain JavaScript ES modules: pixel-art sprites and textures standing in a l
 tilt-shift-blurred 3D diorama, with a 24-hour lighting palette, weather, particles, god rays,
 procedural music and an Octopath-style UI. **Everything is generated at runtime** — textures,
 character sheets, props, sounds and music; the engine ships no image or audio files. Three front
-ends share the engine: a demo **game** that plays `lumina-level` JSON files (six shipped levels,
+ends share the engine: a demo **game** that plays `lumina-level` JSON files (seven shipped levels,
 from the 28 × 22 hamlet Willowmere to the 128 × 128 Starfall Vale and town of Gildhaven, including **Cinderwatch Pass**,
 the one level with real-time ARPG combat), a visual **level editor** with a live HD-2D preview, and
 standalone **sandbox** pages that test one module each. There is no test
@@ -86,7 +86,8 @@ Details: [user/GETTING_STARTED.md](user/GETTING_STARTED.md).
    [Emberfall](design/levels/emberfall.md) (the reference village),
    [Starfall Vale](design/levels/starfall-vale.md) (128 × 128, generated),
    [Gildhaven](design/levels/gildhaven.md) (a 128 × 128 town, generated),
-   [Cinderwatch Pass](design/levels/cinderwatch-pass.md) (96 × 120, generated, combat).
+   [Cinderwatch Pass](design/levels/cinderwatch-pass.md) (96 × 120, generated, combat),
+   [Ashen Crypt](design/levels/ashen-crypt.md) (64 × 88, generated, first dark dungeon).
 6. Writing levels by hand or with a script: [specs/LEVEL_FORMAT.md](specs/LEVEL_FORMAT.md) and
    [specs/LEVEL_STORAGE_API.md](specs/LEVEL_STORAGE_API.md).
 7. The look you are designing for: [design/VISUAL_DESIGN.md](design/VISUAL_DESIGN.md).
@@ -235,6 +236,8 @@ describes the code.
       level.
     - [cinderwatch-pass.md](design/levels/cinderwatch-pass.md) — Cinderwatch Pass, the generated
       96 × 120 combat level (camp, glade, two branches, quarry, the Cinderheart boss).
+    - [ashen-crypt.md](design/levels/ashen-crypt.md) — the first dark HD-2D dungeon, with branching
+      chambers, upgrade treasure, checkpoints and the Ashen Warden.
     - [gildhaven.md](design/levels/gildhaven.md) — Gildhaven, the generated 128 × 128 walled river
       town on fair day (68 villagers; how its streets are spaced for the north-looking camera).
 - **development/** — working on the repository

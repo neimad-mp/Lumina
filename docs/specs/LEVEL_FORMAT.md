@@ -365,6 +365,13 @@ values field by field (the column "Invalid values" says how).
 | `minimap` | boolean | shown | `false` hides the HUD minimap under the clock. The world map (N / Tab) works either way. The editor's Level settings never writes the default (`true`) into a file that did not have the field. |
 | `combat` | boolean | auto: combat is on exactly when the level has an `enemy` object | `true` forces combat on (the player's sword kit, chests and waystones work without enemies); `false` forces a peaceful level (enemies are not spawned; chests and waystones are only examined). `levelHasCombat(level)` in `ObjectCatalog.js` is the one test ([COMBAT.md §3](../contracts/COMBAT.md#3-enabling-combat-per-level)). Never written by default; the editor's Level settings (*Combat: Auto / On / Off*) removes it again for Auto. Cinderwatch Pass has no key (auto). |
 
+Two additional optional environment fields support dungeon levels (2026-10-08):
+
+| Key | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `look` | string | normal outdoor look | `'dark-dungeon'` dims and desaturates ambient/sun lighting toward charcoal, retains warm point lights and adjusts the grade. Game and editor share the preset in `WeatherLook.js`. Missing/unknown values preserve the default exactly. No inspector field; kept when editing. |
+| `combatText` | `{ bossEpithet?: string, victorySubtitle?: string }` | existing Cinderwatch text | Level-specific boss subtitle and victory banner. Each absent/non-string field retains the existing text. Kept when editing; no inspector field. |
+
 ### 9.3 Camera
 
 `environment.camera` is `null` (automatic) or an object:

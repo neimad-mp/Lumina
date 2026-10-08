@@ -2,8 +2,8 @@
 
 The design document of **Cinderwatch Pass**, the combat demo level: a 96 × 120 mountain pass climbed
 from a safe camp at the south edge, through a meadow, over one of two branches (the Bramble Ruins or
-the Hollow Mire) and across a quarry, to Cinderheart's caldera. It is the only shipped level with
-enemies, so it is the only one that turns the ARPG combat of
+the Hollow Mire) and across a quarry, to Cinderheart's caldera. Like [Ashen Crypt](ashen-crypt.md),
+it turns the ARPG combat of
 [COMBAT.md](../../contracts/COMBAT.md) on (automatically: it has `enemy` objects and no
 `environment.combat` key). Like Starfall Vale it is **generated** by a deterministic,
 self-validating script; this page documents what the script builds and how to change it.
