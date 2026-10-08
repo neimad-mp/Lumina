@@ -62,7 +62,19 @@ original object counts, shader counts, light budgets and combat settings. Their 
 composition warning counts remain 39 / 10 / 1 / 15 / 17 / 1 for Emberfall / Starfall / Gildhaven /
 Brightwater / Willowmere / Cinderwatch respectively; all have zero level-check errors.
 
+## Human play-test feedback — 2026-10-08
+
+The user played the dungeon and defeated the Warden. They described the boss as fun,
+challenging and rewarding to beat, and the mobs along the route as fun. They liked the colours,
+look and atmosphere, and considered the layout a strong first prototype.
+
+Preserve those qualities as the dungeon grows. The soundtrack is the next refinement: the user
+said the atmosphere could benefit from different music. Its musical direction is awaiting their
+choice; no new soundtrack has been adopted yet. This feedback supports the current prototype's
+combat and visual direction; broader difficulty and audio coverage still need review as content
+changes.
+
 This is the first playable dungeon prototype. Its enemies, hero, fires, music and boss reuse the
-current procedural assets. The earlier visual concept sheet is a direction reference. Human
-combat-balance, audio and art review remain necessary. Equipment slots, wings, item glow tiers,
-`+0` to `+15` refining, jewel currency, persistent progression and multiplayer are later decisions.
+current procedural assets. The earlier visual concept sheet is a direction reference. Equipment
+slots, wings, item glow tiers, `+0` to `+15` refining, jewel currency, persistent progression and
+multiplayer are later decisions.
