@@ -186,7 +186,7 @@
     {"id":"rock_13","type":"rock","x":25.4,"z":34.8,"opts":{"size":0.9,"seed":null}},
     {"id":"rock_14","type":"rock","x":13.4,"z":35.6,"opts":{"size":0.6,"seed":null}},
     {"id":"fence_1","type":"fence","x0":3.2,"z0":20.3,"x1":8.2,"z1":20.3,"opts":{}},
-    {"id":"fence_2","type":"fence","x0":3.4,"z0":23.4,"x1":9.9,"z1":23.4,"opts":{}},
+    {"id":"fence_2","type":"fence","x0":3.4,"z0":23.4,"x1":8.4,"z1":23.4,"opts":{}},
     {"id":"fence_3","type":"fence","x0":9.9,"z0":23.4,"x1":9.9,"z1":26.2,"opts":{}},
     {"id":"fence_4","type":"fence","x0":9.9,"z0":27.6,"x1":9.9,"z1":29.2,"opts":{}},
     {"id":"fence_5","type":"fence","x0":3.4,"z0":29.2,"x1":9.9,"z1":29.2,"opts":{}},

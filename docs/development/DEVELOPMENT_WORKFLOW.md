@@ -1,5 +1,10 @@
 # Development workflow
 
+> **Current workflow (2026-10-08):** [AGENTS.md](../../AGENTS.md) defines the Codex / GitHub
+> setup: make and verify changes in `lumina-test` (`test`); promote completed, verified changes
+> to `lumina-main` (`main`). Section 9's local-only `master` conventions describe the historical
+> Claude development setup, rather than the current branch policy.
+
 > **Purpose.** How to work on Lumina day to day: setup, the project layout, running and building,
 > the sandbox-first approach for engine work, how levels are edited or generated, the regression
 > practice that keeps Emberfall and the level files stable, the git conventions used so far,

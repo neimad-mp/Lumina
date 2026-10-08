@@ -54,6 +54,7 @@ known-issues pass) and [Resolved (2026-09-27)](#resolved-2026-09-27).
 - [Environment](#environment)
 - [Documentation discrepancies](#documentation-discrepancies)
 - [Code comments that disagree with the code](#code-comments-that-disagree-with-the-code)
+- [Resolved (2026-10-08)](#resolved-2026-10-08)
 - [Resolved (2026-10-01)](#resolved-2026-10-01)
 - [Resolved (2026-09-30)](#resolved-2026-09-30)
 - [Resolved (2026-09-28)](#resolved-2026-09-28)
@@ -304,7 +305,6 @@ The traps most likely to cost a fresh session time:
 | LVL-16 | **Brightwater Crossing: the well roof hides the inn's door step.** The well's roof at (16, 15) covers the strip between the well and the Brightwater Inn: a player knocking at the inn door (16, 12.9) is mostly covered — 12 of 15 sprite points hidden, the x-ray silhouette shows — and 11 of 15 at the north end of the walkway west of the well (14.8, 14.0). Found while fixing LVL-15. | run | A layout change (move the well a little south or west) with the user's agreement, or accept. |
 | LVL-18 | **Object values that the load keeps can still throw later.** Since the LVL-17 fix ([Resolved](#resolved-2026-10-01)) the load itself never throws on a JSON object with its own `toString` key (`{"toString": 1}`, which `String()`, `Number()` and template literals cannot convert): the fields it converts fall back to their defaults. Fields it keeps as they are can still throw wherever code later turns them into text or uses them as a key: an NPC `name` or `portraitColor` (the editor's Outliner builds a text signature from every object's `name`; the Inspector's inputs; in the game the talk ends with `[Lumina] interaction failed`), a texture name in the legend or in `opts` (`TextureLibrary.has` converts the key, and the warning's template throws), environment values. Only a hand-written or hostile file can do this. Recorded by the LVL-17 review; confirmed by reading the code, not run site by site. | code | Convert such fields with `toText` ([`utils/own.js`](../../src/engine/utils/own.js)) where they are read, or drop non-string values of string fields in `normalizeLevel` / `normalizeObject` (valid files must keep their bytes). |
 | LVL-19 | **The colour names `"constructor"` and `"__proto__"` give black, silently.** three.js looks a colour name up in its keyword table with a plain index (`Color.setColorName` in `node_modules/three/src/math/Color.js`) after lower-casing it, so the two `Object.prototype` names that are already lower case find an inherited member and the colour becomes black (0, 0, 0) — no warning, no throw, no NaN — where any other unknown name warns *Unknown color* and keeps the previous colour. Level colours that reach `THREE.Color` this way: a `light` object's `color` (the point light made from its descriptor), a particle area's `params.color` / `colorEnd` / `colors` (`Particles` sets them with `Color.set`). `CharacterSprites` (an NPC's `spec` colours) checks the names itself since LVL-17. Not patched: three.js is a dependency. | code | Accept, or guard every colour three.js parses from level data (`LightingSystem` / `LightPool` lights, the editor's bulbs, `Particles`) with an own-key test on `THREE.Color.NAMES`; an "only hex or numbers" rule would reject valid CSS colour names. |
-| LVL-20 | **Emberfall: Tobin's fenced field is sealed.** The field's gate — the gap in its east fence (`fence_3` ends at z 26.2, `fence_4` starts at 27.6, x 9.9) — opens onto the west wall of the Thatched Cottage (`thatch_cottage`, (12.5, 27.6), 4 × 3, its collider from x ≈ 10.4): the corridor between the fence and the wall is ≈ 0.3 wide, too narrow for the player (radius 0.3). In the game, walking east out of the field stops at x 9.83, and north or south along the gate goes nowhere (harness, 2026-10-02). Old Tobin (`farmer`, home (6.8, 26.3), wander 2) can be talked to only across the fence, when he wanders near it. Found by `npm run level:check -- emberfall` (its only error: "NPC farmer (Old Tobin) cannot be reached to talk"). | run | Open the field: move the gate to the north fence (`fence_2`, toward the farmyard) or the cottage ≥ 0.7 east. Emberfall is the reference level — change it with the user's agreement, then the fingerprint and round trip (TASK_PLAYBOOKS §13, §16). |
 
 ## Combat
 
@@ -421,6 +421,12 @@ that disagree with the code; the rows below are prose, which it cannot read (fix
 | CMT-18 | [`tools/make-starfall-vale.mjs`](../../tools/make-starfall-vale.mjs) | The header lists `extras()` before `people()`; the main sequence runs `people()` first. `CROWN_KINDS.birch[1]` (1.25) is never used — `crownOf()` hard-codes the birch radii (0.78 / 1.05). |
 
 ---
+
+## Resolved (2026-10-08)
+
+| ID | Before | Fix and verification |
+| --- | --- | --- |
+| LVL-20 | **Emberfall: Tobin's fenced field was sealed.** The east fence gap opened against the Thatched Cottage's west wall, leaving too little clearance for the player. The level checker reported that Old Tobin could not be reached. | Shortened the north fence `fence_2` from `x1: 9.9` to `8.4`, making a 1.5-unit entrance from the farmyard without moving the cottage or changing any other level. Replayed the same real movement from (9.1, 22.7): originally blocked at z 23.0; after the fix reached z 26.727 inside the field. Emberfall now has 0 checker errors / 39 existing composition warnings (previously 1 / 40), and serialization remains byte-identical. Game and editor browser checks are clean. The expected scene baseline changes locally: static colliders 150 → 148; 12 lights, 57 shader programs and 136 level objects remain unchanged. Historical fingerprints describe the pre-repair scene. |
 
 ## Resolved (2026-10-01)
 

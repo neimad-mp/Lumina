@@ -1,5 +1,9 @@
 # AI agent onboarding — start here
 
+> **Current project instructions (2026-10-08):** read [AGENTS.md](../../AGENTS.md) first for
+> the stable `main` / development `test` workflow and the adopted dark ARPG direction. Earlier
+> architectural and verification guidance remains applicable unless those instructions override it.
+
 > **Purpose.** The first file a fresh AI coding session (or a new human contributor) should read.
 > It says what Lumina is, which documents to read for which kind of task, where everything lives,
 > the invariants that are easy to break, how to verify a change, and how earlier sessions worked.

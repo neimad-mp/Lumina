@@ -1,5 +1,9 @@
 # CLAUDE.md
 
+> **Current workflow (2026-10-08):** read [AGENTS.md](AGENTS.md) first. Development now uses
+> Codex and GitHub, with `lumina-test` on `test` and a verified stable `lumina-main` on `main`.
+> References below to a local-only `master` branch describe the earlier setup.
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## What this is
@@ -92,7 +96,8 @@ Gildhaven's checks live in `tools/lib/levelcheck.mjs` (`checkLevel`), shared wit
 `tools/check-level.mjs` (`npm run level:check`): reachability, stairs, bridges, waterfalls,
 overlaps, what the north-looking camera cannot see past roofs and crowns — errors for a broken
 level, warnings for the composition rules (`--strict`: errors too). Run it after editing a level
-in the editor; today it reports one error on the shipped levels (KNOWN_ISSUES LVL-20).
+in the editor. The shipped levels report zero errors after the 2026-10-08 LVL-20 repair;
+existing composition warnings remain recorded by the checker.
 
 ## Contracts and docs (read before changing a module)
 
